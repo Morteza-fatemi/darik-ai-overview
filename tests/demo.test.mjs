@@ -40,7 +40,7 @@ test('all-status view never labels sums including cancelled orders as revenue',(
   assert.equal(get('current').textContent,fmt(1100)+' واحد');
   assert.equal(get('prior').textContent,fmt(1700)+' واحد');
   for(const id of ['current-label','prior-label','change-label','aov-label']){
-    assert.match(get(id).textContent,/نه فروش|نه AOV فروش/);
+    assert.match(get(id).textContent,/نه (?:تغییر )?فروش|نه AOV فروش/);
   }
   assert.match(get('trace').children[4].textContent,/سفارش‌های لغوشده/);
   assert.match(get('trace').children[4].textContent,/فروش تحقق‌یافته نیست/);
