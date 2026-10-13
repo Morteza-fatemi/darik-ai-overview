@@ -41,10 +41,12 @@ These are **logical architectural capabilities**. Public documentation does **no
 - [**Security model** — threats, privacy and authorization checks](SECURITY_MODEL.md)
 - [**Engineering decisions** — trade-offs, constraints and design rationale](ENGINEERING_DECISIONS.md)
 - [**Security reporting**](SECURITY.md)
+- [**Offline synthetic interactive demo**](demo/index.html) — download and open locally, no live provider or production data
+- [**Public evidence roadmap**](ROADMAP.md)
 
 ## Demonstrating functionality responsibly
 
-A reproducible public demo should use **synthetic orders/customers**, a simulated read-only adapter and predetermined expected results. Production records, real prompts, provider keys and internal request/response payloads belong in private repositories and internal test systems. No public SDK or functional local backend is included here.
+A reproducible public demo should use **synthetic orders/customers**, a simulated read-only adapter and predetermined expected results. Production records, real prompts, provider keys and internal request/response payloads belong in private repositories and internal test systems. A standalone, offline synthetic demo demonstrates deterministic five-stage calculation and evidence checks; it is not the actual Darik backend. No public SDK or functional local backend is included here.
 
 ## Technical direction
 
