@@ -1,10 +1,10 @@
 <!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Darik | Synthetic Offline Agentic Demo</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f6f4fc;color:#28233b;font:15px/1.8 Tahoma,Arial,sans-serif}main{max-width:1050px;margin:35px auto;padding:0 18px}header{padding:28px;border-radius:24px;background:#4d36a9;color:white}h1,h2{margin:0}header h1{font-size:29px}.sub{opacity:.85}.warn{display:inline-block;padding:5px 13px;border-radius:50px;background:#fcf0b2;color:#6c5100;font-size:13px;margin:10px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px;margin-top:16px}.card{padding:18px;background:#fff;border:1px solid #e5dff6;border-radius:18px}.count{font-size:29px;font-weight:bold}section{margin-top:18px}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap}button,select{border:1px solid #d7ccee;border-radius:11px;padding:9px 14px;font:inherit;background:white;color:#342450;cursor:pointer}button.primary{background:#6245bd;color:#fff}button:focus-visible,select:focus-visible{outline:3px solid #bcabf0}.trace{margin:8px 0;padding:13px;border-right:3px solid #7156ce;background:white;border-radius:10px}p{margin:4px 0;color:#656079}ul{padding-right:23px}footer{font-size:13px;color:#77738c;margin:20px 0}@media(max-width:550px){header{padding:20px}header h1{font-size:23px}}
-</style></head><body><main><header><div class="sub">DARIK AI — REFERENCE DEMO</div><h1>شبیه‌سازی تحلیل چندمرحله‌ای فروش با شواهد</h1><div class="warn">کاملاً ساختگی و آفلاین · بدون LLM یا اتصال به فروشگاه</div><p style="color:#fff">نمونهٔ آموزشی Orchestrator → Tool → Evidence → Deterministic Verification</p></header>
-<section class="toolbar"><label for="status">وضعیت سفارش:</label><select id="status"><option value="paid">پرداخت‌شده</option><option value="all">همهٔ سفارش‌ها</option></select><button type="button" class="primary" id="analyze">محاسبه و اعتبارسنجی مجدد</button><button type="button" id="reset">بازنشانی</button></section>
-<section class="grid" aria-live="polite"><article class="card"><p>فروش دورهٔ جاری</p><div id="current" class="count">—</div></article><article class="card"><p>فروش دورهٔ پیشین</p><div id="prior" class="count">—</div></article><article class="card"><p>تغییر فروش</p><div id="change" class="count">—</div></article><article class="card"><p>میانگین سفارش جاری</p><div id="aov" class="count">—</div></article></section>
+</style></head><body><main><header><div class="sub">DARIK AI — REFERENCE DEMO</div><h1>شبیه‌سازی تحلیل مالی سفارش‌ها با شواهد و تفکیک وضعیت</h1><div class="warn">کاملاً ساختگی و آفلاین · بدون LLM یا اتصال به فروشگاه</div><p style="color:#fff">نمونهٔ آموزشی Orchestrator → Tool → Evidence → Deterministic Verification</p></header>
+<section class="toolbar"><label for="status">وضعیت سفارش:</label><select id="status"><option value="paid">پرداخت‌شده</option><option value="all">همهٔ وضعیت‌ها (مبلغ ثبت‌شده، نه فروش)</option></select><button type="button" class="primary" id="analyze">محاسبه و اعتبارسنجی مجدد</button><button type="button" id="reset">بازنشانی</button></section>
+<section class="grid" aria-live="polite"><article class="card"><p id="current-label">فروش پرداخت‌شدهٔ دورهٔ جاری</p><div id="current" class="count">—</div></article><article class="card"><p id="prior-label">فروش پرداخت‌شدهٔ دورهٔ پیشین</p><div id="prior" class="count">—</div></article><article class="card"><p id="change-label">تغییر فروش پرداخت‌شده</p><div id="change" class="count">—</div></article><article class="card"><p id="aov-label">میانگین سفارش پرداخت‌شدهٔ جاری</p><div id="aov" class="count">—</div></article></section>
 <section class="card"><h2>ردیابی قابل حسابرسیِ ساختگی</h2><div id="trace" aria-live="polite"></div></section>
-<section class="card"><h2>مرزبندی داده و ادعا</h2><ul><li>تمام داده‌ها در همین HTML نوشته شده و فقط در حافظهٔ مرورگر خوانده می‌شوند.</li><li>عدد و فرمول به‌شکل قطعی محاسبه می‌شود، نه توسط مدل زبانی.</li><li>این دمو هیچ دادهٔ مشتری، توکن یا نشانی واقعی ندارد.</li><li>این نمونه توانایی طراحی مفهوم را نشان می‌دهد، نه اتصال Production یا بنچمارک واقعی داریک.</li></ul></section>
+<section class="card"><h2>مرزبندی داده و ادعا</h2><ul><li>تمام داده‌ها در همین HTML نوشته شده و فقط در حافظهٔ مرورگر خوانده می‌شوند.</li><li>عدد و فرمول به‌شکل قطعی محاسبه می‌شود، نه توسط مدل زبانی.</li><li>فقط سفارش‌های پرداخت‌شده در این مثال «فروش» شمرده می‌شوند؛ بازپرداخت و مالیات در این دیتاست شبیه‌سازی نشده است.</li><li>این دمو هیچ دادهٔ مشتری، توکن یا نشانی واقعی ندارد.</li><li>این نمونه توانایی طراحی مفهوم را نشان می‌دهد، نه اتصال Production یا بنچمارک واقعی داریک.</li></ul></section>
 <footer>Offline synthetic demonstration · No external API, prompt submission, customer records, local storage or network requests.</footer></main>
 <script>
 'use strict';
@@ -20,16 +20,21 @@ const now=get('current'),prev=get('previous');
 const sum=rows=>rows.reduce((a,r)=>a+r.total,0);
 const current=sum(now),previous=sum(prev);
 const change=previous ? ((current-previous)/previous*100) : null;
+const isRevenue=status==='paid';
+document.getElementById('current-label').textContent=isRevenue?'فروش پرداخت‌شدهٔ دورهٔ جاری':'جمع مبلغ سفارش‌های ثبت‌شدهٔ جاری (شامل لغوشده؛ نه فروش)';
+document.getElementById('prior-label').textContent=isRevenue?'فروش پرداخت‌شدهٔ دورهٔ پیشین':'جمع مبلغ سفارش‌های ثبت‌شدهٔ پیشین (شامل لغوشده؛ نه فروش)';
+document.getElementById('change-label').textContent=isRevenue?'تغییر فروش پرداخت‌شده':'تغییر مبلغ سفارش‌های ثبت‌شده (نه تغییر فروش)';
+document.getElementById('aov-label').textContent=isRevenue?'میانگین سفارش پرداخت‌شدهٔ جاری':'میانگین مبلغ سفارش ثبت‌شدهٔ جاری (نه AOV فروش)';
 document.getElementById('current').textContent=fmt(current)+' واحد';
 document.getElementById('prior').textContent=fmt(previous)+' واحد';
 document.getElementById('change').textContent=change===null?'غیرقابل محاسبه':fmt(change)+'٪';
 document.getElementById('aov').textContent=now.length?fmt(current/now.length)+' واحد':'بدون سفارش';
 const steps=[
 '۱. مجوز نمایشی: دسترسی صرفاً به مجموعه‌دادهٔ ساختگی این صفحه.',
-'۲. ابزار نمایشی: فیلتر وضعیت '+(status==='paid'?'paid':'all')+' و انتخاب دو بازهٔ نمونه.',
+'۲. ابزار نمایشی: فیلتر وضعیت '+(isRevenue?'paid':'all')+' و انتخاب دو بازهٔ نمونه.',
 '۳. منبع: '+fmt(now.length)+' سفارش جاری و '+fmt(prev.length)+' سفارش پیشین؛ هیچ رکورد واقعی وجود ندارد.',
 '۴. محاسبهٔ قطعی: '+fmt(current)+' / '+fmt(now.length)+' سفارش در برابر '+fmt(previous)+' / '+fmt(prev.length)+' سفارش.',
-'۵. راستی‌آزمایی: وضعیت داده‌ها کامل، واحدها یکسان، مخرج '+(previous?'غیرصفر':'صفر')+'؛ علت اقتصادی تغییر بدون مدرک قابل نتیجه‌گیری نیست.'
+'۵. راستی‌آزمایی: وضعیت داده‌ها کامل، واحدها یکسان، مخرج '+(previous?'غیرصفر':'صفر')+'؛ '+(isRevenue?'فقط سفارش‌های پرداخت‌شده برای فروش منظور شده‌اند؛ بازپرداخت مدل نشده است.':'سفارش‌های لغوشده نیز در مبلغ ثبت‌شده لحاظ شده‌اند؛ این عدد فروش تحقق‌یافته نیست.')+' علت اقتصادی تغییر بدون مدرک قابل نتیجه‌گیری نیست.'
 ];
 document.getElementById('trace').replaceChildren(...steps.map(t=>{const p=document.createElement('p');p.className='trace';p.textContent=t;return p;}));
 }
