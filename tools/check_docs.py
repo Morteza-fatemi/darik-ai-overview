@@ -10,6 +10,7 @@ DOCS = [
     "SECURITY_MODEL.md",
     "ENGINEERING_DECISIONS.md",
     "SECURITY.md",
+    "ROADMAP.md",
 ]
 failures = []
 for filename in DOCS:
@@ -33,6 +34,16 @@ if (ROOT / "ARCHITECTURE.md").is_file():
     for word in ("Trust boundaries", "Evidence", "privacy", "Maturity", "mermaid"):
         if word.casefold() not in arch.casefold():
             failures.append(f"Architecture missing coverage: {word}")
+demo = ROOT / "demo/index.html"
+if not demo.is_file():
+    failures.append("Missing offline synthetic demo")
+else:
+    demo_text = demo.read_text(encoding="utf-8")
+    if "ساختگی" not in demo_text or "Offline" not in demo_text:
+        failures.append("Demo must visibly disclose fabricated data and offline scope")
+    for forbidden in ("fetch(", "XMLHttpRequest(", "WebSocket("):
+        if forbidden in demo_text:
+            failures.append("External IO not permitted in synthetic demo")
 if failures:
     for failure in failures:
         print("FAIL:", failure, file=sys.stderr)
